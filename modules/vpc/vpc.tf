@@ -3,7 +3,6 @@ data "aws_default_tags" "tags" {}
 
 locals {
   create_nat = var.create_subnet_private && var.create_nat_gateway
-  tags = var.tags
   name = var.tfname
   s3_bucket_name = "${local.name}-vpc-flow-logs-${data.aws_caller_identity.current.account_id}"
   az_length = length(var.azs)
@@ -21,7 +20,6 @@ resource "aws_eip" "nat" {
 
   tags = merge(
     { "Name" = "${local.name}-nat-gateway" },
-    local.tags,
     data.aws_default_tags.tags.tags
   )
 }
@@ -53,19 +51,15 @@ module "vpc" {
   external_nat_ip_ids = "${aws_eip.nat.*.id}"
 
   public_subnet_tags = merge(
-    { "kubernetes.io/role/elb" = 1 },
-    local.tags
+    { "kubernetes.io/role/elb" = 1 }
   )
 
   private_subnet_tags = merge(
     {
       "kubernetes.io/role/internal-elb" = 1
       "karpenter.sh/discovery" = local.name # Tags subnets for Karpenter auto-discovery
-    },
-    local.tags
+    }
   )
-
-  tags = local.tags
 
 
   enable_dns_hostnames = true

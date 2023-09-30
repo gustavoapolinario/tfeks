@@ -20,12 +20,6 @@ variable "ipv6_cidr" {
   default     = null
 }
 
-variable "tags" {
-  description = "A map of tags to add to all resources"
-  type        = map(string)
-  default     = {}
-}
-
 variable "enable_flow_log" {
   description = "Whether or not to enable VPC Flow Logs"
   type        = bool
