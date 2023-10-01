@@ -9,16 +9,11 @@
   - Provisioner, AWSNodeTemplate configuration
   - Sample of Deployment to test the karpenter: pause 
 
-## TF Modules
+## TF Providers
 
-hashicorp/aws
-
-hashicorp/helm
-
-hashicorp/kubernetes
-
-gavinbunney/kubectl
-
-terraform-aws-modules/eks/aws
-
-terraform-aws-modules/eks/aws//modules/karpenter
+- hashicorp/aws
+- hashicorp/helm
+- hashicorp/kubernetes
+- gavinbunney/kubectl
+- terraform-aws-modules/eks/aws
+- terraform-aws-modules/eks/aws//modules/karpenter

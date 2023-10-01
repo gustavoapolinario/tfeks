@@ -9,9 +9,8 @@
 
 ## TF Providers
 
-hashicorp/aws
-
-terraform-aws-modules/vpc/aws
+- hashicorp/aws
+- terraform-aws-modules/vpc/aws
 
 ## VPC
 

@@ -9,17 +9,12 @@ This repository is a lab to test Terraform/OpenTofu with EKS
 
 ## TF Providers
 
-hashicorp/aws
-
-hashicorp/helm
-
-hashicorp/kubernetes
-
-gavinbunney/kubectl
-
-terraform-aws-modules/eks/aws
-
-terraform-aws-modules/eks/aws//modules/karpenter
+- hashicorp/aws
+- hashicorp/helm
+- hashicorp/kubernetes
+- gavinbunney/kubectl
+- terraform-aws-modules/eks/aws
+- terraform-aws-modules/eks/aws//modules/karpenter
 
 ## Modules
 
