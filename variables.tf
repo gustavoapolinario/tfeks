@@ -1,3 +1,8 @@
+variable "aws_region" {
+  description = "AWS Region to run the EKS"
+  type = string
+}
+
 variable "qtt_az" {
   description = "Number of Zones to use"
   type        = number
@@ -37,11 +42,6 @@ variable "create_subnet_public" {
   type        = bool
   default     = true
 }
-# variable "public_subnet_suffix" {
-#   description = "Suffix to append to public subnets name"
-#   type        = string
-#   default     = "public"
-# }
 
 # Private subnets
 variable "create_subnet_private" {
@@ -59,47 +59,6 @@ variable "one_nat_gateway_per_az" {
   default     = true
   type        = bool
 }
-# variable "private_subnet_suffix" {
-#   description = "Suffix to append to private subnets name"
-#   type        = string
-#   default     = "private"
-# }
-
-# variable "private_dedicated_network_acl" {
-#   description = "Whether to use dedicated network ACL (not default) and custom rules for private subnets"
-#   type        = bool
-#   default     = false
-# }
-
-# variable "private_inbound_acl_rules" {
-#   description = "Private subnets inbound network ACLs"
-#   type        = list(map(string))
-#   default = [
-#     {
-#       rule_number = 100
-#       rule_action = "allow"
-#       from_port   = 0
-#       to_port     = 0
-#       protocol    = "-1"
-#       cidr_block  = "0.0.0.0/0"
-#     },
-#   ]
-# }
-
-# variable "private_outbound_acl_rules" {
-#   description = "Private subnets outbound network ACLs"
-#   type        = list(map(string))
-#   default = [
-#     {
-#       rule_number = 100
-#       rule_action = "allow"
-#       from_port   = 0
-#       to_port     = 0
-#       protocol    = "-1"
-#       cidr_block  = "0.0.0.0/0"
-#     },
-#   ]
-# }
 
 # Data subnets
 variable "create_subnet_data" {
@@ -108,47 +67,22 @@ variable "create_subnet_data" {
   default     = true
 }
 
-# variable "database_subnet_suffix" {
-#   description = "Suffix to append to database subnets name"
-#   type        = string
-#   default     = "db"
-# }
-
-# variable "database_dedicated_network_acl" {
-#   description = "Whether to use dedicated network ACL (not default) and custom rules for database subnets"
-#   type        = bool
-#   default     = false
-# }
-
-# variable "database_inbound_acl_rules" {
-#   description = "Database subnets inbound network ACL rules"
-#   type        = list(map(string))
-#   default = [
-#     {
-#       rule_number = 100
-#       rule_action = "allow"
-#       from_port   = 0
-#       to_port     = 0
-#       protocol    = "-1"
-#       cidr_block  = "0.0.0.0/0"
-#     },
-#   ]
-# }
-
-# variable "database_outbound_acl_rules" {
-#   description = "Database subnets outbound network ACL rules"
-#   type        = list(map(string))
-#   default = [
-#     {
-#       rule_number = 100
-#       rule_action = "allow"
-#       from_port   = 0
-#       to_port     = 0
-#       protocol    = "-1"
-#       cidr_block  = "0.0.0.0/0"
-#     },
-#   ]
-# }
 
 
+###########################################
+############# EKS Variables ###############
+###########################################
+variable "kubernetes_version" {
+  description = "Kubernetes Version"
+  type        = string
+}
 
+variable "cluster_endpoint_public_access" {
+  description = "(Optional) Cluster Endpoint with public access"
+  type        = bool
+  default     = false
+}
+
+variable "namespaces_with_fargate" {
+  description = "(Optional) Namespaces to run all pods on fargate"
+}
