@@ -3,19 +3,33 @@
 The .gitignore file are not ignoring the .tfvars
 if you fork the repository make sure to uncomment this ignore pattern
 
-# Introduction
+# The Project
 
 This repository is a lab to test Terraform/OpenTofu with EKS
 
-## TF Modules
+## TF Providers
 
 hashicorp/aws
-terraform-aws-modules/vpc/aws
 
-## VPC
+hashicorp/helm
 
-For the VPC, I'm using the module terraform-aws-modules to easely create everything
-You can set the variables to customize the VPC creation
+hashicorp/kubernetes
+
+gavinbunney/kubectl
+
+terraform-aws-modules/eks/aws
+
+terraform-aws-modules/eks/aws//modules/karpenter
+
+## Modules
+
+### VPC
+
+[README](modules/vpc/README.md)
+
+### EKS
+
+[README](modules/eks/README.md)
 
 
 # How to start

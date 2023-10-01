@@ -1,4 +1,4 @@
-# VPC Module
+# EKS Module
 
 - EKS
   - Public/Private Endpoint
@@ -12,8 +12,13 @@
 ## TF Modules
 
 hashicorp/aws
+
 hashicorp/helm
+
 hashicorp/kubernetes
+
 gavinbunney/kubectl
+
 terraform-aws-modules/eks/aws
+
 terraform-aws-modules/eks/aws//modules/karpenter

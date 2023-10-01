@@ -7,9 +7,10 @@
 - Elastic IP created out of vpc. If delete the vpc, the EIP is not lost
 - @TODO: flow logs to S3
 
-## TF Modules
+## TF Providers
 
 hashicorp/aws
+
 terraform-aws-modules/vpc/aws
 
 ## VPC
