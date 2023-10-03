@@ -4,6 +4,8 @@
 # https://github.com/cloudposse/terraform-aws-tfstate-backend#usage
 module "terraform_state_backend" {
   source = "cloudposse/tfstate-backend/aws"
+
+  count = var.create_state_storage ? 1 : 0
   
   version     = "1.1.1"
   namespace  = "apolinario"

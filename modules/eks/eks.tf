@@ -8,6 +8,11 @@ locals {
     # local.auth_roles_lb,
     []
   )
+
+  aws_auth_users = concat(
+    var.auth_users,
+    []
+  )
 }
 
 module "eks" {
@@ -25,6 +30,7 @@ module "eks" {
 
   manage_aws_auth_configmap = true
   aws_auth_roles = local.aws_auth_roles
+  aws_auth_users = local.aws_auth_users
 
 
   # Fargate profiles use the cluster primary security group so these are not utilized

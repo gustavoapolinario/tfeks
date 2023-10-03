@@ -85,4 +85,22 @@ variable "cluster_endpoint_public_access" {
 
 variable "namespaces_with_fargate" {
   description = "(Optional) Namespaces to run all pods on fargate"
+  type = list
+  default = null
 }
+
+variable "auth_users" {
+  description = "(Optional) Auth Map Users to be created on EKS"
+  type = list
+  default = []
+}
+
+###########################################
+############# tf-backend ###############
+###########################################
+variable "create_state_storage" {
+  description = "(Optional) Create the state storage S3 and DynamoDB to save the state and lock?"
+  type = bool
+  default = true
+}
+

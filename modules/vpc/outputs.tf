@@ -314,3 +314,8 @@ output "vpc_flow_log_cloudwatch_iam_role_arn" {
 #   description = "ID of the security group"
 #   value       = module.vpc_endpoints.security_group_id
 # }
+
+output "eip_id" {
+  description = "List of Elastic IP generated for Nat Gateway"
+  value = "${aws_eip.nat.*.id}"
+}

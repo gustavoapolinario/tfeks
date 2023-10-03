@@ -31,6 +31,7 @@ module "eks" {
   cluster_endpoint_public_access = var.cluster_endpoint_public_access
   kubernetes_version = var.kubernetes_version
   namespaces_with_fargate = var.namespaces_with_fargate
+  auth_users = var.auth_users
 
   azs = local.azs
 }

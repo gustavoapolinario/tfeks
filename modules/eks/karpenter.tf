@@ -102,6 +102,8 @@ resource "kubectl_manifest" "karpenter_provisioner" {
       kubeletConfiguration:
         containerRuntime: containerd
         maxPods: 110
+        imageGCHighThresholdPercent: 85
+        imageGCLowThresholdPercent: 80
       limits:
         resources:
           cpu: 1000
