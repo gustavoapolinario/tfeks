@@ -12,7 +12,15 @@ If you lost the access on EKS, you can recreate the creation role, assume it and
 
 On role-create-eks folder, prepare the terraform and apply it.
 
-Get the role generated
+```
+cd role-create-eks
+terraform init
+terraform apply
+```
+
+## Configure the main project
+
+Get the outputs generated
 
 Go to the main project and put the role on provider.tf
 
@@ -25,6 +33,22 @@ provider "aws" {
     role_arn    = "arn:aws:iam::66666666:role/eks_creation_role"
     external_id = "eks_creation_role"
   }
+}
+```
+
+Go on the tfvars and put the auth_user/auth_role
+
+It is necessary to give access to your default user/role on cluster
+
+ex:
+```
+auth_role = {
+  "groups" = [
+    "system:bootstrappers",
+    "system:nodes",
+  ]
+  "rolearn" = "arn:aws:iam::66666666:role/myrole"
+  "username" = "system:node:{{EC2PrivateDNSName}}"
 }
 ```
 

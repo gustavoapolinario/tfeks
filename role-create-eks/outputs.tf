@@ -6,3 +6,25 @@ output "eks_creation_role" {
     aws_iam_role.eks_creation_role.name,
   ]
 }
+
+output "auth_user" {
+  value = strcontains(data.aws_caller_identity.current.arn, "user") ? {
+    userarn  = data.aws_caller_identity.current.arn
+    username = "system:node:{{EC2PrivateDNSName}}"
+    groups = [
+      "system:bootstrappers",
+      "system:nodes",
+    ]
+  }: null
+}
+
+output "auth_role" {
+  value = strcontains(data.aws_caller_identity.current.arn, "role") ? {
+    rolearn  = data.aws_caller_identity.current.arn
+    username = "system:node:{{EC2PrivateDNSName}}"
+    groups = [
+      "system:bootstrappers",
+      "system:nodes",
+    ]
+  }: null
+}

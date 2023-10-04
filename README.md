@@ -47,7 +47,9 @@ terraform init
 terraform apply
 ```
 
-Update the provider.tf with the assume role before continue to next step
+Get the outputs to update the configurations
+- Update the provider.tf with the assume role 
+- Put the auth_user/auth_role on the tfvars file to give access to your default user
 
 ### Creating the storage for tfstate and lock
 
