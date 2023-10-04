@@ -1,7 +1,7 @@
 # Caution
 
-The .gitignore file are not ignoring the .tfvars and is ignoring the backend.tf
-if you fork the repository make sure to uncomment the .tfvars and comment the backend.tf
+The .gitignore file is ignoring the backend.tf
+if you fork the repository make sure to comment the backend.tf
 
 # The Project
 
@@ -37,6 +37,15 @@ This command will install the providers needed for the project
 terraform init
 ```
 
+## Create the tfvars file
+
+Rename the terraform.tfvars.example file to terraform.tfvars. It has the a sample to use the project
+
+```
+mv terraform.tfvars.example terraform.tfvars
+```
+
+
 ### Create a role before create the EKS
 
 Follow the steps on folder [role-create-eks](./role-create-eks/README.md) and create a role to create the EKS Cluster
@@ -50,6 +59,12 @@ terraform apply
 Get the outputs to update the configurations
 - Update the provider.tf with the assume role 
 - Put the auth_user/auth_role on the tfvars file to give access to your default user
+
+Return to main project
+
+```
+cd ../
+```
 
 ### Creating the storage for tfstate and lock
 
@@ -115,4 +130,9 @@ For exclude everything, use this command:
 
 ```
 terraform destroy
+```
+Return to main project
+
+```
+cd ../
 ```
