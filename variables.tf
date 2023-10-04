@@ -95,6 +95,12 @@ variable "auth_users" {
   default = []
 }
 
+variable "auth_roles" {
+  description = "(Optional) Auth Map Roles to be created on EKS"
+  type = list
+  default = []
+}
+
 ###########################################
 ############# tf-backend ###############
 ###########################################

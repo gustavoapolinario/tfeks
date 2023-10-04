@@ -13,7 +13,7 @@ create_subnet_data = true
 cluster_endpoint_public_access = true #only for tests, it must be private with VPN
 kubernetes_version = "1.27"
 namespaces_with_fargate = ["karpenter", "kube-system"]
-auth_users = []
+
 # # Ex of auth_users
 # auth_users = [
 #   {
@@ -26,6 +26,18 @@ auth_users = []
 #     username = "user2"
 #     groups   = ["system:masters"]
 #   },
+# ]
+
+# # Ex of auth_users
+# auth_roles = [
+#   {
+#     rolearn  = data.aws_caller_identity.original.arn
+#     username = "system:node:{{EC2PrivateDNSName}}"
+#     groups = [
+#       "system:bootstrappers",
+#       "system:nodes",
+#     ]
+#   }
 # ]
 
 # tf-backend state storage and lock

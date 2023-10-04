@@ -6,6 +6,7 @@ locals {
   aws_auth_roles = concat(
     local.auth_roles_karpenter,
     # local.auth_roles_lb,
+    var.auth_roles,
     []
   )
 

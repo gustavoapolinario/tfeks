@@ -40,3 +40,9 @@ variable "auth_users" {
   type = list
   default = []
 }
+
+variable "auth_roles" {
+  description = "(Optional) Auth Map Roles to be created on EKS"
+  type = list
+  default = []
+}

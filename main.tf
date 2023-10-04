@@ -32,6 +32,7 @@ module "eks" {
   kubernetes_version = var.kubernetes_version
   namespaces_with_fargate = var.namespaces_with_fargate
   auth_users = var.auth_users
+  auth_roles = var.auth_roles
 
   azs = local.azs
 }
