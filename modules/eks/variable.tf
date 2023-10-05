@@ -46,3 +46,9 @@ variable "auth_roles" {
   type = list
   default = []
 }
+
+variable "karpenter_helm_chart_version" {
+  type        = string
+  default     = "0.31.0"
+  description = "Karpenter Helm chart version."
+}
