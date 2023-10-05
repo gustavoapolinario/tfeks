@@ -107,6 +107,12 @@ cd role-create-eks
 terraform destroy
 ```
 
+Return to main project
+
+```
+cd ../
+```
+
 
 ## Analyse the changes
 
@@ -130,9 +136,4 @@ For exclude everything, use this command:
 
 ```
 terraform destroy
-```
-Return to main project
-
-```
-cd ../
 ```
