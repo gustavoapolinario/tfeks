@@ -37,3 +37,6 @@ module "eks" {
   azs = local.azs
 }
 
+module "rbac_default_roles" {
+  source = "./modules/eks-rbac-default-roles"
+}
