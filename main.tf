@@ -44,14 +44,15 @@ module "eks_rbac_default_roles" {
   source = "./modules/eks-rbac-default-roles"
 }
 
-# module "eks_loadbalancer" {
-#   depends_on = [ module.eks ]
-#   source = "./modules/eks-load-balancer-controller"
+module "eks_loadbalancer" {
+  depends_on = [ module.eks ]
+  source = "./modules/eks-load-balancer-controller"
 
-#   cluster_name = module.eks.cluster_name
-#   aws_region = local.region
-#   cluster_identity_oidc_issuer = module.eks.oidc_provider
-#   cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
-#   helm_chart_version = "v2.6.1"
+  cluster_name = module.eks.cluster_name
+  aws_region = local.region
+  cluster_identity_oidc_issuer = module.eks.oidc_provider
+  cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
+  helm_chart_version = "1.4.6"
+  aws_lb_controller_version = "2.6.1"
   
-# }
+}
