@@ -1,9 +1,6 @@
 data "aws_region" "current" {}
 data "aws_availability_zones" "available" {}
 data "aws_caller_identity" "current" { }
-data "aws_caller_identity" "original" {
-  provider = aws.original
-}
 
 locals {
   name   = basename(path.cwd)
@@ -47,3 +44,14 @@ module "eks_rbac_default_roles" {
   source = "./modules/eks-rbac-default-roles"
 }
 
+# module "eks_loadbalancer" {
+#   depends_on = [ module.eks ]
+#   source = "./modules/eks-load-balancer-controller"
+
+#   cluster_name = module.eks.cluster_name
+#   aws_region = local.region
+#   cluster_identity_oidc_issuer = module.eks.oidc_provider
+#   cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
+#   helm_chart_version = "v2.6.1"
+  
+# }

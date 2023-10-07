@@ -15,10 +15,6 @@ provider "aws" {
   # }
 }
 
-provider "aws" {
-  region = var.aws_region
-  alias = "original"
-}
 
 data "aws_eks_cluster_auth" "current" {
   name = module.eks.cluster_name
