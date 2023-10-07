@@ -110,3 +110,11 @@ variable "create_state_storage" {
   default = true
 }
 
+###########################################
+############# outputs ###############
+###########################################
+variable "all_outputs" {
+  description = "(Optional) Show all outputs? Hide modules output"
+  type = bool
+  default = true
+}

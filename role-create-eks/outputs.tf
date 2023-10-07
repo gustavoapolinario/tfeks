@@ -7,7 +7,16 @@ output "eks_creation_role" {
   ]
 }
 
-output "auth_user" {
+output "assume_role" {
+  description = "Assume role to put on main.tf file to assume role and create the eks as this role"
+  value = {
+    role_arn    = "arn:aws:iam::153149144027:role/eks_creation_role"
+    external_id = "eks_creation_role"
+  }
+}
+
+output "auth_users" {
+  description = "Auth user to put on terraform.tfvars file to give access on eks to original role"
   value = strcontains(data.aws_caller_identity.current.arn, "user") ? {
     userarn  = data.aws_caller_identity.current.arn
     username = "system:node:{{EC2PrivateDNSName}}"
@@ -18,7 +27,8 @@ output "auth_user" {
   }: null
 }
 
-output "auth_role" {
+output "auth_roles" {
+  description = "Auth role to put on terraform.tfvars file to give access on eks to original role"
   value = strcontains(data.aws_caller_identity.current.arn, "role") ? {
     rolearn  = data.aws_caller_identity.current.arn
     username = "system:node:{{EC2PrivateDNSName}}"

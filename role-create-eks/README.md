@@ -42,7 +42,7 @@ It is necessary to give access to your default user/role on cluster
 
 ex:
 ```
-auth_role = {
+auth_roles = {
   "groups" = [
     "system:bootstrappers",
     "system:nodes",

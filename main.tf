@@ -1,8 +1,13 @@
+data "aws_region" "current" {}
 data "aws_availability_zones" "available" {}
-data "aws_caller_identity" "current" {}
+data "aws_caller_identity" "current" { }
+data "aws_caller_identity" "original" {
+  provider = aws.original
+}
 
 locals {
   name   = basename(path.cwd)
+  region = data.aws_region.current.name
 
   azs = slice(data.aws_availability_zones.available.names, 0, var.qtt_az)
 
@@ -37,6 +42,8 @@ module "eks" {
   azs = local.azs
 }
 
-module "rbac_default_roles" {
+module "eks_rbac_default_roles" {
+  depends_on = [ module.eks ]
   source = "./modules/eks-rbac-default-roles"
 }
+
