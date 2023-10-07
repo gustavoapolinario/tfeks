@@ -19,10 +19,9 @@ output "auth_users" {
   description = "Auth user to put on terraform.tfvars file to give access on eks to original role"
   value = strcontains(data.aws_caller_identity.current.arn, "user") ? {
     userarn  = data.aws_caller_identity.current.arn
-    username = "system:node:{{EC2PrivateDNSName}}"
+    username = "admin"
     groups = [
-      "system:bootstrappers",
-      "system:nodes",
+      "system:masters",
     ]
   }: null
 }
@@ -31,10 +30,9 @@ output "auth_roles" {
   description = "Auth role to put on terraform.tfvars file to give access on eks to original role"
   value = strcontains(data.aws_caller_identity.current.arn, "role") ? {
     rolearn  = data.aws_caller_identity.current.arn
-    username = "system:node:{{EC2PrivateDNSName}}"
+    username = "admin"
     groups = [
-      "system:bootstrappers",
-      "system:nodes",
+      "system:masters",
     ]
   }: null
 }
