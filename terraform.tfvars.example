@@ -40,6 +40,6 @@ namespaces_with_fargate = ["karpenter", "kube-system"]
 #   }
 # ]
 
-# tf-backend state storage and lock
-create_state_storage = true
+create_state_storage = true # tf-backend state storage and lock
 all_outputs = false
+es_secret_store_namespace = ["dev"]

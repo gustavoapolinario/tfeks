@@ -56,3 +56,23 @@ module "eks_loadbalancer" {
   aws_lb_controller_version = "2.6.1"
   
 }
+
+resource "kubernetes_namespace" "es_secret_store_namespace" {
+  depends_on = [ module.eks ]
+  for_each = toset(var.es_secret_store_namespace)
+  metadata {
+    name = each.key
+  }
+}
+
+module "eks-external-secrets" {
+  depends_on = [ module.eks, kubernetes_namespace.es_secret_store_namespace ]
+  source = "./modules/eks-external-secrets"
+
+  cluster_name = module.eks.cluster_name
+  aws_region = local.region
+  helm_chart_version = "0.9.5"
+  secret_store_namespace = var.es_secret_store_namespace
+  cluster_identity_oidc_issuer = module.eks.oidc_provider
+  cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
+}
