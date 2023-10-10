@@ -13,8 +13,8 @@ This repository is a lab to test Terraform/OpenTofu with EKS
 - hashicorp/helm
 - hashicorp/kubernetes
 - gavinbunney/kubectl
-- terraform-aws-modules/eks/aws
-- terraform-aws-modules/eks/aws//modules/karpenter
+- cloudposse/tfstate-backend/aws
+- and more on each module
 
 ## Modules
 
@@ -25,6 +25,22 @@ This repository is a lab to test Terraform/OpenTofu with EKS
 ### EKS
 
 [README](modules/eks/README.md)
+
+### EKS External Secrets
+
+[README](modules/eks-external-secrets/README.md)
+
+### EKS Load balancer controller
+
+[README](modules/eks-load-balancer-controller/README.md)
+
+### EKS RBAC default roles
+
+[README](modules/eks-rbac-default-roles/README.md)
+
+### Role create eks
+
+[README](role-create-eks/README.md)
 
 
 # How to start
