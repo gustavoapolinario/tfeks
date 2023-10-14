@@ -32,7 +32,6 @@ module "eks" {
   private_subnets = module.vpc.private_subnets
   cluster_endpoint_public_access = var.cluster_endpoint_public_access
   kubernetes_version = var.kubernetes_version
-  namespaces_with_fargate = var.namespaces_with_fargate
   auth_users = var.auth_users
   auth_roles = var.auth_roles
 
@@ -84,4 +83,11 @@ module "eks-ebs-csi-driver" {
   cluster_name = module.eks.cluster_name
   helm_chart_version = "2.23.1"
   cluster_identity_oidc_provider = module.eks.oidc_provider
+}
+
+module "eks-kube-prometheus-stack" {
+  depends_on = [ module.eks ]
+  source = "./modules/eks-kube-prometheus-stack"
+  
+  helm_chart_version = "51.6.0"
 }

@@ -83,12 +83,6 @@ variable "cluster_endpoint_public_access" {
   default     = false
 }
 
-variable "namespaces_with_fargate" {
-  description = "(Optional) Namespaces to run all pods on fargate"
-  type = list
-  default = null
-}
-
 variable "auth_users" {
   description = "(Optional) Auth Map Users to be created on EKS"
   type = list

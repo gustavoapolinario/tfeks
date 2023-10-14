@@ -38,10 +38,17 @@ module "eks" {
   create_cluster_security_group = false
   create_node_security_group    = false
 
+  # Get version of add on using:
+  # aws eks describe-addon-versions --addon-name kube-proxy
   cluster_addons = {
-    kube-proxy = {}
-    vpc-cni    = {}
+    kube-proxy = {
+      addon_version = "v1.27.1-eksbuild.1"
+    }
+    vpc-cni    = {
+      addon_version = "v1.15.0-eksbuild.2"
+    }
     coredns = {
+      addon_version = "v1.10.1-eksbuild.4"
       configuration_values = jsonencode({
         computeType = "Fargate"
         # Ensure that we fully utilize the minimum amount of resources that are supplied by
@@ -69,25 +76,33 @@ module "eks" {
   }
 
 
-  # fargate_profiles = {
-  #   karpenter = {
-  #     selectors = [
-  #       { namespace = "karpenter" }
-  #     ]
-  #   }
-  #   kube-system = {
-  #     selectors = [
-  #       { namespace = "kube-system" }
-  #     ]
-  #   }
-  # }
-  fargate_profiles = [
-    for namespace in var.namespaces_with_fargate:
-    {
-      name      = namespace
-      selectors = [{ namespace = namespace }]
+  fargate_profiles = {
+    karpenter = {
+      selectors = [
+        { namespace = "karpenter" }
+      ]
     }
-  ]
+    vpc-cni = {
+      selectors = [
+        {
+          namespace = "kube-system"
+          labels = {
+            k8s-app = "aws-node"
+          }
+        }
+      ]
+    }
+    coredns = {
+      selectors = [
+        {
+          namespace = "kube-system"
+          labels = {
+            k8s-app = "kube-dns"
+          }
+        }
+      ]
+    }
+  }
 
   tags = merge(data.aws_default_tags.tags.tags, {
     # NOTE - if creating multiple security groups with this module, only tag the

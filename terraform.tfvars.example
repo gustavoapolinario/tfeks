@@ -12,7 +12,6 @@ create_subnet_data = true
 # EKS
 cluster_endpoint_public_access = true #only for tests, it must be private with VPN
 kubernetes_version = "1.27"
-namespaces_with_fargate = ["karpenter", "kube-system"]
 
 # # Ex of auth_users
 # auth_users = [

@@ -29,12 +29,6 @@ variable "cluster_endpoint_public_access" {
   default     = false
 }
 
-variable "namespaces_with_fargate" {
-  description = "(Optional) Namespaces to run all pods on fargate"
-  type = list
-  default = null
-}
-
 variable "auth_users" {
   description = "(Optional) Auth Map Users to be created on EKS"
   type = list
@@ -49,6 +43,6 @@ variable "auth_roles" {
 
 variable "karpenter_helm_chart_version" {
   type        = string
-  default     = "v0.31.0"
+  default     = "v0.31.1"
   description = "Karpenter Helm chart version."
 }
