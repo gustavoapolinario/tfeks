@@ -22,7 +22,7 @@ data "http" "aws-ebs-csi-driver-policy" {
 resource "local_file" "aws-ebs-csi-driver-policy" {
   depends_on  = [data.http.aws-ebs-csi-driver-policy]
   content  = data.http.aws-ebs-csi-driver-policy.response_body
-  filename = "${path.module}/ebs-csi-driver-iam-policy.json"
+  filename = "${path.module}/downloaded-ebs-csi-driver-iam-policy.json"
 }
 
 resource "aws_iam_policy" "ebs_csi_driver" {

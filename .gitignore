@@ -36,3 +36,4 @@ terraform.rc
 
 .terraform.lock.hcl
 backend.tf
+**/downloaded-*

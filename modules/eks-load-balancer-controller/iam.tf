@@ -9,7 +9,7 @@ data "http" "aws-lb-controller-policy" {
 resource "local_file" "aws-lb-controller-policy" {
   depends_on  = [data.http.aws-lb-controller-policy]
   content  = data.http.aws-lb-controller-policy.response_body
-  filename = "${path.module}/iam-policy.json"
+  filename = "${path.module}/downloaded-iam-policy.json"
 }
 
 resource "aws_iam_policy" "kubernetes_alb_controller" {
