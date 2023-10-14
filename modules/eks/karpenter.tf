@@ -36,6 +36,8 @@ module "karpenter" {
 }
 
 resource "helm_release" "karpenter" {
+  depends_on = [ module.eks ]
+
   namespace        = "karpenter"
   create_namespace = true
 
