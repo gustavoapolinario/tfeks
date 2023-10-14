@@ -26,6 +26,10 @@ This repository is a lab to test Terraform/OpenTofu with EKS
 
 [README](modules/eks/README.md)
 
+### EBS CSi Driver
+
+[README](eks-ebs-csi-driver/README.md)
+
 ### EKS External Secrets
 
 [README](modules/eks-external-secrets/README.md)

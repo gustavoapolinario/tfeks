@@ -76,3 +76,12 @@ module "eks-external-secrets" {
   cluster_identity_oidc_issuer = module.eks.oidc_provider
   cluster_identity_oidc_issuer_arn = module.eks.oidc_provider_arn
 }
+
+module "eks-ebs-csi-driver" {
+  depends_on = [ module.eks ]
+  source = "./modules/eks-ebs-csi-driver"
+
+  cluster_name = module.eks.cluster_name
+  helm_chart_version = "2.23.1"
+  cluster_identity_oidc_provider = module.eks.oidc_provider
+}
