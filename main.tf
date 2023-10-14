@@ -84,10 +84,3 @@ module "eks-ebs-csi-driver" {
   helm_chart_version = "2.23.1"
   cluster_identity_oidc_provider = module.eks.oidc_provider
 }
-
-module "eks-kube-prometheus-stack" {
-  depends_on = [ module.eks ]
-  source = "./modules/eks-kube-prometheus-stack"
-  
-  helm_chart_version = "51.6.0"
-}
