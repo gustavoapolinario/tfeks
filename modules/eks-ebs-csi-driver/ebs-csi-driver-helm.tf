@@ -9,17 +9,6 @@ resource "helm_release" "aws_ebs_csi_driver" {
   namespace  = var.namespace
   create_namespace = true
 
-  # set {
-  #   name  = "serviceAccount.create"
-  #   value = "true"
-  # }
-
-  # set {
-  #   name  = "serviceAccount.name"
-  #   value = var.service_account_name
-  # }
-
-
   set {
     name  = "controller.serviceAccount.create"
     value = "true"

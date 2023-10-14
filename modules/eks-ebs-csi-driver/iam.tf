@@ -33,22 +33,3 @@ resource "aws_iam_policy" "ebs_csi_driver" {
 
   policy = data.http.aws-ebs-csi-driver-policy.response_body
 }
-
-# resource "aws_iam_role_policy_attachment" "kubernetes_alb_controller" {
-#   role       = aws_iam_role.ebs_csi_controller_role.name
-#   policy_arn = aws_iam_policy.ebs_csi_driver.arn
-# }
-
-# resource "aws_iam_role_policy_attachment" "ebs_csi_driver" {
-#   role       = aws_iam_role.ebs_csi_driver.name
-#   policy_arn = [
-#     "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy",
-#     aws_iam_policy.ebs_csi_driver.arn
-#   ]
-# }
-
-    # aws-ebs-csi-driver = {
-    #   service_account_role_arn = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/${local.name}-ebs-csi-controller"
-    #   addon_version = "v1.23.1-eksbuild.1"
-    #   resolve_conflicts="PRESERVE"
-    # }
