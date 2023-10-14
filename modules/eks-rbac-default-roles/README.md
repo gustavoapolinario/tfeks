@@ -6,4 +6,4 @@
 
 ## TF Providers
 
-- hashicorp/kubernetes
+- gavinbunney/kubectl
