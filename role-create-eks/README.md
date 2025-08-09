@@ -1,75 +1,36 @@
-# Introduction
+## Requirements
 
-Create the AWS Role before create the EKS.
+| Name | Version |
+|------|---------|
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.20 |
 
-# Motivation
+## Providers
 
-If you lost the access on EKS, you can recreate the creation role, assume it and get access on EKS again
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.67.0 |
 
-# How to do
+## Modules
 
-## Creating the cluste with the role
+No modules.
 
-On role-create-eks folder, prepare the terraform and apply it.
+## Resources
 
-```
-cd role-create-eks
-terraform init
-terraform apply
-```
+| Name | Type |
+|------|------|
+| [aws_iam_role.eks_creation_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.eks_creation_role_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
-## Configure the main project
+## Inputs
 
-Get the outputs generated
+No inputs.
 
-Go to the main project and put the role on provider.tf
+## Outputs
 
-ex:
-
-```
-provider "aws" {
-  ...
-  assume_role {
-    role_arn    = "arn:aws:iam::66666666:role/eks_creation_role"
-    external_id = "eks_creation_role"
-  }
-}
-```
-
-Go on the tfvars and put the auth_user/auth_role
-
-It is necessary to give access to your default user/role on cluster
-
-ex:
-```
-auth_roles = {
-  "groups" = [
-    "system:bootstrappers",
-    "system:nodes",
-  ]
-  "rolearn" = "arn:aws:iam::66666666:role/myrole"
-  "username" = "system:node:{{EC2PrivateDNSName}}"
-}
-```
-
-
-## After create the EKS, delete the role to never use it more, only in incident
-
-```
-cd role-create-eks
-terraform destroy
-```
-
-and comment again the assume_role on provider.tf
-
-ex:
-
-```
-provider "aws" {
-  ...
-  # assume_role {
-  #   role_arn    = "arn:aws:iam::66666666:role/eks_creation_role"
-  #   external_id = "eks_creation_role"
-  # }
-}
-```
+| Name | Description |
+|------|-------------|
+| <a name="output_assume_role"></a> [assume\_role](#output\_assume\_role) | Assume role to put on main.tf file to assume role and create the eks as this role |
+| <a name="output_auth_roles"></a> [auth\_roles](#output\_auth\_roles) | Auth role to put on terraform.tfvars file to give access on eks to original role |
+| <a name="output_auth_users"></a> [auth\_users](#output\_auth\_users) | Auth user to put on terraform.tfvars file to give access on eks to original role |
+| <a name="output_eks_creation_role"></a> [eks\_creation\_role](#output\_eks\_creation\_role) | AWS Role to Create the EKS only. It is necessary to follow the best practices and recovery access in case of lost access on RBAC |
