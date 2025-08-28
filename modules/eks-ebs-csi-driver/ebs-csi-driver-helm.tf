@@ -1,12 +1,12 @@
 # #https://github.com/kubernetes-sigs/aws-ebs-csi-driver/
 
 resource "helm_release" "aws_ebs_csi_driver" {
-  depends_on = [ module.ebs_csi_controller_role ]
-  name       = "aws-ebs-csi-driver"
-  chart      = "aws-ebs-csi-driver"
-  repository = "https://kubernetes-sigs.github.io/aws-ebs-csi-driver"
-  version    = var.helm_chart_version
-  namespace  = var.namespace
+  depends_on       = [module.ebs_csi_controller_role]
+  name             = "aws-ebs-csi-driver"
+  chart            = "aws-ebs-csi-driver"
+  repository       = "https://kubernetes-sigs.github.io/aws-ebs-csi-driver"
+  version          = var.helm_chart_version
+  namespace        = var.namespace
   create_namespace = true
 
   set {

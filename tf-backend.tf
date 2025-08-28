@@ -6,8 +6,8 @@ module "terraform_state_backend" {
   source = "cloudposse/tfstate-backend/aws"
 
   count = var.create_state_storage ? 1 : 0
-  
-  version     = "1.1.1"
+
+  version    = "1.1.1"
   namespace  = "apolinario"
   stage      = "test"
   name       = "terraform"

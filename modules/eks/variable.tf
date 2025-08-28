@@ -5,7 +5,7 @@ variable "tfname" {
 
 variable "azs" {
   description = "The list of AZ to use"
-  type        = list
+  type        = list(any)
 }
 
 variable "vpc_id" {
@@ -27,18 +27,6 @@ variable "cluster_endpoint_public_access" {
   description = "(Optional) Cluster Endpoint with public access"
   type        = bool
   default     = false
-}
-
-variable "auth_users" {
-  description = "(Optional) Auth Map Users to be created on EKS"
-  type = list
-  default = []
-}
-
-variable "auth_roles" {
-  description = "(Optional) Auth Map Roles to be created on EKS"
-  type = list
-  default = []
 }
 
 variable "karpenter_helm_chart_version" {

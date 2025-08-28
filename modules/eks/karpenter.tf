@@ -25,10 +25,8 @@ locals {
 module "karpenter" {
   source = "terraform-aws-modules/eks/aws//modules/karpenter"
 
-  cluster_name           = module.eks.cluster_name
-  irsa_oidc_provider_arn = module.eks.oidc_provider_arn
-
-  policies = {
+  cluster_name = module.eks.cluster_name
+  node_iam_role_additional_policies = {
     AmazonSSMManagedInstanceCore = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
   }
 
@@ -36,7 +34,7 @@ module "karpenter" {
 }
 
 resource "helm_release" "karpenter" {
-  depends_on = [ module.eks ]
+  depends_on = [module.eks]
 
   namespace        = "karpenter"
   create_namespace = true

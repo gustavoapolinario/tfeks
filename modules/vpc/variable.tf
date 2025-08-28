@@ -5,7 +5,7 @@ variable "tfname" {
 
 variable "azs" {
   description = "The list of AZ to use"
-  type        = list
+  type        = list(any)
 }
 
 variable "cidr" {

@@ -1,6 +1,6 @@
 variable "aws_region" {
   description = "AWS Region to run the EKS"
-  type = string
+  type        = string
 }
 
 variable "qtt_az" {
@@ -85,14 +85,14 @@ variable "cluster_endpoint_public_access" {
 
 variable "auth_users" {
   description = "(Optional) Auth Map Users to be created on EKS"
-  type = list
-  default = []
+  type        = list(any)
+  default     = []
 }
 
 variable "auth_roles" {
   description = "(Optional) Auth Map Roles to be created on EKS"
-  type = list
-  default = []
+  type        = list(any)
+  default     = []
 }
 
 ###########################################
@@ -100,8 +100,8 @@ variable "auth_roles" {
 ###########################################
 variable "create_state_storage" {
   description = "(Optional) Create the state storage S3 and DynamoDB to save the state and lock?"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 ###########################################
@@ -109,8 +109,8 @@ variable "create_state_storage" {
 ###########################################
 variable "all_outputs" {
   description = "(Optional) Show all outputs? Hide modules output"
-  type = bool
-  default = true
+  type        = bool
+  default     = true
 }
 
 

@@ -8,11 +8,6 @@ provider "aws" {
     }
   }
 
-  # # Descomment and put the Role to create the EKS Cluster
-  # assume_role {
-  #   role_arn    = "arn:aws:iam::66666666:role/eks_creation_role"
-  #   external_id = "eks_creation_role"
-  # }
 }
 
 

@@ -1,10 +1,10 @@
 module "ebs_csi_controller_role" {
-  depends_on = [ aws_iam_policy.ebs_csi_driver ]
-  source                        = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
-  create_role                   = true
-  role_name                     = "${var.cluster_name}-ebs-csi-controller"
-  provider_url                  = var.cluster_identity_oidc_provider
-  role_policy_arns              = [
+  depends_on   = [aws_iam_policy.ebs_csi_driver]
+  source       = "terraform-aws-modules/iam/aws//modules/iam-assumable-role-with-oidc"
+  create_role  = true
+  role_name    = "${var.cluster_name}-ebs-csi-controller"
+  provider_url = var.cluster_identity_oidc_provider
+  role_policy_arns = [
     "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy",
     aws_iam_policy.ebs_csi_driver.arn
   ]
@@ -20,9 +20,9 @@ data "http" "aws-ebs-csi-driver-policy" {
 }
 
 resource "local_file" "aws-ebs-csi-driver-policy" {
-  depends_on  = [data.http.aws-ebs-csi-driver-policy]
-  content  = data.http.aws-ebs-csi-driver-policy.response_body
-  filename = "${path.module}/downloaded-ebs-csi-driver-iam-policy.json"
+  depends_on = [data.http.aws-ebs-csi-driver-policy]
+  content    = data.http.aws-ebs-csi-driver-policy.response_body
+  filename   = "${path.module}/downloaded-ebs-csi-driver-iam-policy.json"
 }
 
 resource "aws_iam_policy" "ebs_csi_driver" {

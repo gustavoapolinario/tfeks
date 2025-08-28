@@ -3,11 +3,11 @@
 #https://docs.aws.amazon.com/eks/latest/userguide/aws-load-balancer-controller.html
 
 resource "helm_release" "alb_controller" {
-  name       = "aws-load-balancer-controller"
-  chart      = "aws-load-balancer-controller"
-  repository = "https://aws.github.io/eks-charts"
-  version    = var.helm_chart_version
-  namespace  = var.namespace
+  name             = "aws-load-balancer-controller"
+  chart            = "aws-load-balancer-controller"
+  repository       = "https://aws.github.io/eks-charts"
+  version          = var.helm_chart_version
+  namespace        = var.namespace
   create_namespace = true
 
   set {

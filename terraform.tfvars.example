@@ -13,31 +13,8 @@ create_subnet_data = true
 cluster_endpoint_public_access = true #only for tests, it must be private with VPN
 kubernetes_version = "1.27"
 
-# # Ex of auth_users
-# auth_users = [
-#   {
-#     userarn  = "arn:aws:iam::66666666666:user/user1"
-#     username = "user1"
-#     groups   = ["system:masters"]
-#   },
-#   {
-#     userarn  = "arn:aws:iam::66666666666:user/user2"
-#     username = "user2"
-#     groups   = ["system:masters"]
-#   },
-# ]
+# eks_admin_principal_arn = "arn:aws:iam::123456789012:role/my-role-to-eks-admin"
 
-# # Ex of auth_users
-# auth_roles = [
-#   {
-#     rolearn  = data.aws_caller_identity.original.arn
-#     username = "system:node:{{EC2PrivateDNSName}}"
-#     groups = [
-#       "system:bootstrappers",
-#       "system:nodes",
-#     ]
-#   }
-# ]
 
 create_state_storage = true # tf-backend state storage and lock
 all_outputs = false

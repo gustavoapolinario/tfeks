@@ -317,5 +317,5 @@ output "vpc_flow_log_cloudwatch_iam_role_arn" {
 
 output "eip_id" {
   description = "List of Elastic IP generated for Nat Gateway"
-  value = "${aws_eip.nat.*.id}"
+  value       = aws_eip.nat.*.id
 }

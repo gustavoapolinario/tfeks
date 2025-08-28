@@ -47,8 +47,8 @@ data "aws_iam_policy_document" "external_secrets_assume" {
       variable = "${replace(var.cluster_identity_oidc_issuer, "https://", "")}:sub"
 
       values = [
-        for namespace in var.secret_store_namespace: 
-          "system:serviceaccount:${namespace}:${var.service_account_name}"
+        for namespace in var.secret_store_namespace :
+        "system:serviceaccount:${namespace}:${var.service_account_name}"
       ]
     }
 
@@ -70,8 +70,8 @@ resource "aws_iam_role_policy_attachment" "external_secrets" {
 resource "kubernetes_service_account" "es_parameter_store_sa" {
   for_each = toset(var.secret_store_namespace)
   metadata {
-    name        = "${var.service_account_name}"
-    namespace   = each.key
+    name      = var.service_account_name
+    namespace = each.key
     annotations = {
       "eks.amazonaws.com/role-arn" = aws_iam_role.external_secrets.arn
     }
