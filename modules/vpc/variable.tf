@@ -51,8 +51,8 @@ variable "one_nat_gateway_per_az" {
 }
 
 # Data subnets
-variable "create_subnet_data" {
-  description = "Create the data subnet?"
+variable "create_subnet_private_isolated" {
+  description = "Create the private isolated subnet?"
   type        = bool
   default     = true
 }

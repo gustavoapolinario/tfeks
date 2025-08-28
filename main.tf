@@ -13,13 +13,13 @@ locals {
 module "vpc" {
   source = "./modules/vpc"
 
-  tfname                 = local.name
-  cidr                   = var.cidr
-  create_subnet_public   = var.create_subnet_public
-  create_subnet_private  = var.create_subnet_private
-  create_nat_gateway     = var.create_nat_gateway
-  one_nat_gateway_per_az = var.one_nat_gateway_per_az
-  create_subnet_data     = var.create_subnet_data
+  tfname                         = local.name
+  cidr                           = var.cidr
+  create_subnet_public           = var.create_subnet_public
+  create_subnet_private          = var.create_subnet_private
+  create_nat_gateway             = var.create_nat_gateway
+  one_nat_gateway_per_az         = var.one_nat_gateway_per_az
+  create_subnet_private_isolated = var.create_subnet_private_isolated
 
   azs = local.azs
 }

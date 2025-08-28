@@ -61,8 +61,8 @@ variable "one_nat_gateway_per_az" {
 }
 
 # Data subnets
-variable "create_subnet_data" {
-  description = "Create the data subnet?"
+variable "create_subnet_private_isolated" {
+  description = "Create the private isolated subnet?"
   type        = bool
   default     = true
 }
@@ -81,18 +81,6 @@ variable "cluster_endpoint_public_access" {
   description = "(Optional) Cluster Endpoint with public access"
   type        = bool
   default     = false
-}
-
-variable "auth_users" {
-  description = "(Optional) Auth Map Users to be created on EKS"
-  type        = list(any)
-  default     = []
-}
-
-variable "auth_roles" {
-  description = "(Optional) Auth Map Roles to be created on EKS"
-  type        = list(any)
-  default     = []
 }
 
 ###########################################

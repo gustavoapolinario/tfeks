@@ -35,7 +35,7 @@ module "vpc" {
   azs                           = var.azs
   public_subnets                = var.create_subnet_public ? [for k, v in var.azs : cidrsubnet(var.cidr, 4, k)] : null
   private_subnets               = var.create_subnet_private ? [for k, v in var.azs : cidrsubnet(var.cidr, 4, k + 3)] : null
-  database_subnets              = var.create_subnet_data ? [for k, v in var.azs : cidrsubnet(var.cidr, 4, k + 6)] : null
+  database_subnets              = var.create_subnet_private_isolated ? [for k, v in var.azs : cidrsubnet(var.cidr, 4, k + 6)] : null
   public_subnet_ipv6_prefixes   = [for i in range(1, local.az_length + 1) : i]
   private_subnet_ipv6_prefixes  = [for i in range(4, local.az_length + 4) : i]
   database_subnet_ipv6_prefixes = [for i in range(7, local.az_length + 7) : i]
@@ -50,12 +50,10 @@ module "vpc" {
   reuse_nat_ips       = true
   external_nat_ip_ids = aws_eip.nat.*.id
 
-  # @TODO: export the tags
   public_subnet_tags = {
     "kubernetes.io/role/elb" = 1
   }
 
-  # @TODO: export the tags
   private_subnet_tags = {
     "kubernetes.io/role/internal-elb" = 1
     "karpenter.sh/discovery"          = local.name # Tags subnets for Karpenter auto-discovery
@@ -69,52 +67,4 @@ module "vpc" {
   public_subnet_assign_ipv6_address_on_creation = true
   create_egress_only_igw                        = true
 
-  # # Flow logs
-  # vpc_flow_log_tags = local.tags
-  # enable_flow_log           = var.enable_flow_log ? true : false
-  # flow_log_file_format = var.enable_flow_log ? "parquet" : null
-  # flow_log_destination_type = "s3"
-  # flow_log_destination_arn  = module.s3_bucket.flow_logs.s3_bucket_arn
 }
-
-
-# module "s3_bucket" "flow_logs" {
-#   source  = "terraform-aws-modules/s3-bucket/aws"
-#   version = "~> 3.0"
-
-#   bucket        = local.s3_bucket_name
-#   policy        = data.aws_iam_policy_document.flow_log_s3.json
-#   force_destroy = true
-# versioning_configuration {
-#   status = "Enabled"
-# }
-
-# }
-
-# data "aws_iam_policy_document" "flow_log_s3" {
-#   statement {
-#     sid = "AWSLogDeliveryWrite"
-
-#     principals {
-#       type        = "Service"
-#       identifiers = ["delivery.logs.amazonaws.com"]
-#     }
-
-#     actions = ["s3:PutObject"]
-
-#     resources = ["arn:aws:s3:::${local.s3_bucket_name}/AWSLogs/*"]
-#   }
-
-#   statement {
-#     sid = "AWSLogDeliveryAclCheck"
-
-#     principals {
-#       type        = "Service"
-#       identifiers = ["delivery.logs.amazonaws.com"]
-#     }
-
-#     actions = ["s3:GetBucketAcl"]
-
-#     resources = ["arn:aws:s3:::${local.s3_bucket_name}"]
-#   }
-# }
